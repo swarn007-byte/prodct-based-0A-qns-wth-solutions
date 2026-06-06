@@ -1,33 +1,39 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <map>
+#include <numeric> // Required for std::gcd
 
 using namespace std;
-
 typedef long long ll;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
     int t;
     cin >> t;
     while (t--) {
         int n;
         cin >> n;
         vector<long long> a(n);
-        for (auto& x : a) cin >> x;
+        for (int i = 0; i < n; i++) cin >> a[i];
 
-        // Step 1: make all 1s into 2s
-        for (auto& x : a) {
-            if (x == 1) x = 2;
+        for (int i = 0; i < n; i++) {
+            if (a[i] == 1) a[i] = 2;
         }
 
-        // Step 2: for each pair, fix divisibility
         for (int i = 0; i < n - 1; i++) {
             if (a[i + 1] % a[i] == 0) {
-                a[i + 1]++;  // increment by 1 breaks divisibility
+                a[i + 1]++;
             }
         }
 
         for (int i = 0; i < n; i++) {
-            cout << a[i] << " \n"[i == n - 1];
+            cout << a[i];
+            if (i < n - 1) cout << " ";
         }
+        cout << "\n";
     }
     return 0;
 }
