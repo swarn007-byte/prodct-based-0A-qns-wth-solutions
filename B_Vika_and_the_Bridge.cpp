@@ -74,3 +74,65 @@ int main()
 
     return 0;
 }
+class Solution {
+public:
+    vector<string> generateValidStrings(int n, int k) {
+        vector<string> ans;
+
+        for (int i = 0; i < (1 << n); i++) {
+
+            bitset<12> b(i);
+            string s = b.to_string().substr(12 - n);
+
+            int cost = 0;
+            bool ok = true;
+
+            for (int j = 0; j < n; j++) {
+                if (s[j] == '1') {
+                    if (j > 0 && s[j - 1] == '1') {
+                        ok = false;
+                        break;
+                    }
+                    cost += j;
+                }
+            }
+
+            if (ok && cost <= k) {
+                ans.push_back(s);
+            }
+        }
+
+        return ans;
+    }
+};
+class Solution {
+public:
+    vector<string> generateValidStrings(int n, int k) {
+        vector<string> res;
+
+        for (int i = 0; i < (1 << n); i++) {
+
+            bitset<12> b(i);
+            string s = b.to_string().substr(12 - n);
+
+            int cost = 0;
+            bool ok = true;
+
+            for (int j = 0; j < n; j++) {
+                if (s[j] == '1') {
+                    if (j > 0 && s[j - 1] == '1') {
+                        ok = false;
+                        break;
+                    }
+                    cost += j;
+                }
+            }
+
+            if (ok && cost <= k) {
+                res.push_back(s);
+            }
+        }
+
+        return ;
+    }
+};

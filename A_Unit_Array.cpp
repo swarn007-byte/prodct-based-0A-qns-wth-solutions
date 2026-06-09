@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>
-#include <numeric> // Required for std::gcd
+#include <numeric>
 using namespace std;
 
 int main(){
