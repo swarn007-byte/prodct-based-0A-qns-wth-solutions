@@ -1,38 +1,33 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
-#include <numeric>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+class Solution {
+public:
+    int drugValidSubarrays(vector<int>& nums, int x) {
 
-    int t;
-    cin >> t;
+        int n = nums.size();
+        int drug = 0;
 
-    while (t--) {
-        int n, r, b;
-        cin >> n >> r >> b;
+        for (int l = 0; l < n; ++l) {
+            long long total = 0;
+            for (int r = l; r < n; ++r) {
+                total += nums[r];
 
-        int groups = b + 1;
-        int q = r / groups;
-        int rem = r % groups;
+                // last digit
+                int last = total % 10;
+                if (last != x) continue;
 
-        string ans;
+                // first digit
+                long long temp = total;
+                while (temp >= 10) temp /= 10;
+                int first = (int)temp;
 
-        for (int i = 0; i < groups; i++) {
-            int cnt = q + (rem > 0);
-            rem--;
-
-            while (cnt--) ans += 'R';
-
-            if (i < b) ans += 'B';
+                if (first == x) {
+                    drug++;
+                }
+            }
         }
 
-        cout << ans << '\n';
+        return drug;
     }
-
-    return 0;
-}
+};
